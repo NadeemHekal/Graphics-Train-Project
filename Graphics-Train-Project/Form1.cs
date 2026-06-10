@@ -24,7 +24,7 @@ namespace Graphics_Train_Project
 
         int selected = -1;
         int ride_index = 0;
-        int speed_value = 7;
+        int speed = 7;
         float xball = 0;
         float yball = 0;
 
@@ -51,11 +51,6 @@ namespace Graphics_Train_Project
             DrawDubb(pic.CreateGraphics());
         }
 
-        void Form1_Shown(object sender, EventArgs e)
-        {
-            ScrollToPoint(path_start);
-            DrawDubb(pic.CreateGraphics());
-        }
 
         void btnLine_Click(object sender, EventArgs e)
         {
@@ -114,17 +109,22 @@ namespace Graphics_Train_Project
         {
             if (selected < 0 || selected >= paths.Count || paths[selected].type != 0)
             {
-                this.Text = "Select a DDA straight segment.";
                 return;
             }
 
             paths[selected].length += value;
 
             if (paths[selected].length < 60)
+            {
                 paths[selected].length = 60;
 
+            }
+
             if (paths[selected].length > 500)
+            {
                 paths[selected].length = 500;
+
+            }
 
             FinishChange("Straight length updated.");
         }
@@ -143,17 +143,20 @@ namespace Graphics_Train_Project
         {
             if (selected < 0 || selected >= paths.Count || paths[selected].type != 1)
             {
-                this.Text = "Select a polar circle segment.";
                 return;
             }
 
             paths[selected].rad += value;
 
             if (paths[selected].rad < 40)
+            {
                 paths[selected].rad = 40;
+            }
 
             if (paths[selected].rad > 220)
+            {
                 paths[selected].rad = 220;
+            }
 
             FinishChange("Circle radius updated.");
         }
@@ -172,19 +175,21 @@ namespace Graphics_Train_Project
         {
             if (selected < 0 || selected >= paths.Count || paths[selected].type != 2)
             {
-                this.Text = "Select a curve segment.";
                 return;
             }
 
             paths[selected].height += value;
 
             if (paths[selected].height < 20)
+            {
                 paths[selected].height = 20;
+            }
 
             if (paths[selected].height > 260)
+            {
                 paths[selected].height = 260;
+            }
 
-            FinishChange("Curve height updated.");
         }
 
         void btnRotateLeft_Click(object sender, EventArgs e)
@@ -320,22 +325,26 @@ namespace Graphics_Train_Project
 
         void btnSpeedMinus_Click(object sender, EventArgs e)
         {
-            speed_value--;
+            speed--;
 
-            if (speed_value < 1)
-                speed_value = 1;
+            if (speed < 1)
+            {
+                speed = 1;
+            }
 
-            speed_label.Text = "Speed: " + speed_value;
+            speed_label.Text = "Speed: " + speed;
         }
 
         void btnSpeedPlus_Click(object sender, EventArgs e)
         {
-            speed_value++;
+            speed++;
 
-            if (speed_value > 20)
-                speed_value = 20;
+            if (speed > 20)
+            {
+                speed = 20;
+            }
 
-            speed_label.Text = "Speed: " + speed_value;
+            speed_label.Text = "Speed: " + speed;
         }
 
         void btnClear_Click(object sender, EventArgs e)
@@ -353,7 +362,6 @@ namespace Graphics_Train_Project
             RefreshList(-1);
             scroll_panel.AutoScrollPosition = new Point(0, 0);
 
-            this.Text = "Path cleared.";
             DrawDubb(pic.CreateGraphics());
         }
 
@@ -364,15 +372,21 @@ namespace Graphics_Train_Project
             for (int i = 0; i < paths.Count; i++)
             {
                 if (paths[i].type == 0)
-                    AddLinePoints(paths[i]);
+                {
+                    AddLine(paths[i]);
+                }
                 else if (paths[i].type == 1)
-                    AddCirclePoints(paths[i]);
+                {
+                    AddCircle(paths[i]);
+                }
                 else
-                    AddCurvePoints(paths[i]);
+                {
+                    AddCurve(paths[i]);
+                }
             }
         }
 
-        void AddLinePoints(PathPart p)
+        void AddLine(PathPart p)
         {
             DDA line = new DDA();
 
@@ -394,7 +408,7 @@ namespace Graphics_Train_Project
             ride_points.Add(p.end);
         }
 
-        void AddCirclePoints(PathPart p)
+        void AddCircle(PathPart p)
         {
             Circle c = new Circle();
 
@@ -404,17 +418,17 @@ namespace Graphics_Train_Project
 
             PointF loop_point = c.Getnextpoint(90);
 
-            AddDdaPoints(p.start, loop_point);
+            AddDda(p.start, loop_point);
 
             for (int th = 90; th >= -270; th -= 3)
             {
                 ride_points.Add(c.Getnextpoint(th));
             }
 
-            AddDdaPoints(loop_point, p.end);
+            AddDda(loop_point, p.end);
         }
 
-        void AddDdaPoints(PointF start, PointF end)
+        void AddDda(PointF start, PointF end)
         {
             DDA line = new DDA();
 
@@ -436,7 +450,7 @@ namespace Graphics_Train_Project
             ride_points.Add(end);
         }
 
-        void AddCurvePoints(PathPart p)
+        void AddCurve(PathPart p)
         {
             BezierCurve curve = MakeCurve(p);
 
@@ -451,7 +465,7 @@ namespace Graphics_Train_Project
             if (ride_points.Count == 0)
                 return;
 
-            ride_index += speed_value;
+            ride_index += speed;
 
             if (ride_index >= ride_points.Count)
             {
@@ -473,10 +487,14 @@ namespace Graphics_Train_Project
             int y = (int)p.Y - scroll_panel.ClientSize.Height / 2;
 
             if (x < 0)
+            {
                 x = 0;
+            }
 
             if (y < 0)
+            {
                 y = 0;
+            }
 
             scroll_panel.AutoScrollPosition = new Point(x, y);
         }
@@ -488,16 +506,9 @@ namespace Graphics_Train_Project
 
         void DrawDubb(Graphics g)
         {
-            if (off == null)
-                return;
-
             Graphics g2 = Graphics.FromImage(off);
-
             DrawScene(g2);
-
             g.DrawImage(off, 0, 0);
-
-            g2.Dispose();
         }
 
         void DrawScene(Graphics g)
@@ -515,44 +526,26 @@ namespace Graphics_Train_Project
                 }
             }
 
-            g.DrawString(
-                "ROLLERCOASTER BUILD ZONE",
-                new Font("Arial", 18, FontStyle.Bold),
-                Brushes.DarkSlateGray,
-                35,
-                30);
-
             for (int i = 0; i < paths.Count; i++)
             {
                 bool is_selected = i == selected;
 
                 if (paths[i].type == 0)
+                {
                     DrawLinePath(g, paths[i], is_selected);
+                }
                 else if (paths[i].type == 1)
+                {
                     DrawCirclePath(g, paths[i], is_selected);
+                }
                 else
+                {
                     DrawCurvePath(g, paths[i], is_selected);
+                }
 
                 PointF mid = GetPathPoint(paths[i], 0.5f);
 
-                g.DrawString(
-                    (i + 1).ToString(),
-                    new Font("Arial", 9, FontStyle.Bold),
-                    Brushes.DarkSlateGray,
-                    mid.X,
-                    mid.Y + 10);
             }
-
-            if (paths.Count == 0)
-            {
-                g.DrawString(
-                    "Use the buttons on the left to build a path.",
-                    new Font("Arial", 16, FontStyle.Bold),
-                    Brushes.SteelBlue,
-                    120,
-                    560);
-            }
-
             if (ride_points.Count > 0)
             {
                 DrawCar(g);
@@ -561,8 +554,7 @@ namespace Graphics_Train_Project
 
         void DrawCar(Graphics g)
         {
-            if (car_img == null)
-                return;
+
 
             Rectangle source = new Rectangle(50, 130, 1100, 520);
             Rectangle destination = new Rectangle((int)xball - 45, (int)yball - 45, 90, 45);
@@ -707,14 +699,22 @@ namespace Graphics_Train_Project
             int sy;
 
             if (p1.X < p2.X)
+            {
                 sx = 1;
+            }
             else
+            {
                 sx = -1;
+            }
 
             if (p1.Y < p2.Y)
+            {
                 sy = 1;
+            }
             else
+            {
                 sy = -1;
+            }
 
             int err = dx + dy;
 
@@ -723,7 +723,9 @@ namespace Graphics_Train_Project
                 g.FillRectangle(Brushes.Navy, x - 2, y - 2, 5, 5);
 
                 if (x == p2.X && y == p2.Y)
+                {
                     break;
+                }
 
                 int e2 = 2 * err;
 
@@ -766,11 +768,6 @@ namespace Graphics_Train_Project
 
             BezierCurve curve = MakeCurve(p);
             return curve.CalcCurvePointAtTime(t);
-        }
-
-        private void add_group_Enter(object sender, EventArgs e)
-        {
-
         }
 
     }

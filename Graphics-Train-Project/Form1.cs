@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -311,6 +313,8 @@ namespace Graphics_Train_Project
     public partial class Form1 : Form
     {
         Bitmap off;
+        Bitmap background_img;
+        Bitmap car_img;
         Timer tt = new Timer();
 
         List<PathPart> paths = new List<PathPart>();
@@ -322,7 +326,7 @@ namespace Graphics_Train_Project
         float yball = 0;
         bool ride_running = false;
 
-        PointF path_start = new PointF(120, 650);
+        PointF path_start = new PointF(120, 850);
 
         Panel side_bar;
         Panel scroll_panel;
@@ -354,6 +358,10 @@ namespace Graphics_Train_Project
         {
             off = new Bitmap(pic.Width, pic.Height);
 
+            string image_folder = Path.Combine(Application.StartupPath, "Assets");
+            background_img = new Bitmap(Path.Combine(image_folder, "background.jpg"));
+            car_img = new Bitmap(Path.Combine(image_folder, "car.jpg"));
+
             AddFirstPaths();
 
             DrawDubb(pic.CreateGraphics());
@@ -365,14 +373,13 @@ namespace Graphics_Train_Project
             side_bar.Dock = DockStyle.Left;
             side_bar.Width = 265;
             side_bar.AutoScroll = true;
-            side_bar.BackColor = Color.FromArgb(17, 27, 46);
+            side_bar.BackColor = Color.Gainsboro;
 
-            Label title = MakeLabel("ROLLERCOASTER LAB", 20, 18, 225, 28);
+            Label title = MakeLabel("ROLLERCOASTER SIMULATOR", 20, 18, 225, 28);
             title.Font = new Font("Arial", 14, FontStyle.Bold);
-            title.ForeColor = Color.Orange;
             side_bar.Controls.Add(title);
 
-            side_bar.Controls.Add(MakeLabel("Build, customize, then ride.", 20, 50, 225, 25));
+            side_bar.Controls.Add(MakeLabel("Choose a segment and edit it.", 20, 50, 225, 25));
 
             AddSection("ADD TRACK", 88);
             AddButton("+ DDA Straight", 20, 116, 225, btnLine_Click);
@@ -384,8 +391,8 @@ namespace Graphics_Train_Project
             path_list = new ListBox();
             path_list.Location = new Point(20, 274);
             path_list.Size = new Size(225, 112);
-            path_list.BackColor = Color.FromArgb(32, 47, 72);
-            path_list.ForeColor = Color.White;
+            path_list.BackColor = Color.White;
+            path_list.ForeColor = Color.Black;
             path_list.Font = new Font("Arial", 9);
             path_list.SelectedIndexChanged += path_list_SelectedIndexChanged;
             side_bar.Controls.Add(path_list);
@@ -415,14 +422,13 @@ namespace Graphics_Train_Project
             speed_bar.TickFrequency = 3;
             side_bar.Controls.Add(speed_bar);
 
-            Button start_button = AddButton("START / RESTART", 20, 672, 225, btnStart_Click);
-            start_button.BackColor = Color.FromArgb(226, 105, 38);
+            AddButton("START / RESTART", 20, 672, 225, btnStart_Click);
 
             pause_button = AddButton("PAUSE", 20, 712, 108, btnPause_Click);
             AddButton("CLEAR PATH", 137, 712, 108, btnClear_Click);
 
             status_label = MakeLabel("Ready. Select a segment to edit it.", 20, 760, 225, 55);
-            status_label.ForeColor = Color.LightSteelBlue;
+            status_label.ForeColor = Color.Black;
             side_bar.Controls.Add(status_label);
 
             scroll_panel = new Panel();
@@ -447,7 +453,7 @@ namespace Graphics_Train_Project
             L.Text = text;
             L.Location = new Point(x, y);
             L.Size = new Size(w, h);
-            L.ForeColor = Color.White;
+            L.ForeColor = Color.Black;
             L.Font = new Font("Arial", 9);
 
             return L;
@@ -460,11 +466,11 @@ namespace Graphics_Train_Project
             b.Text = text;
             b.Location = new Point(x, y);
             b.Size = new Size(w, 32);
-            b.BackColor = Color.FromArgb(39, 59, 88);
-            b.ForeColor = Color.White;
-            b.FlatStyle = FlatStyle.Flat;
-            b.FlatAppearance.BorderColor = Color.FromArgb(80, 110, 145);
-            b.Font = new Font("Arial", 9, FontStyle.Bold);
+            b.BackColor = SystemColors.Control;
+            b.ForeColor = Color.Black;
+            b.FlatStyle = FlatStyle.Standard;
+            b.Font = new Font("Arial", 9);
+            b.UseVisualStyleBackColor = true;
             b.Click += event_method;
 
             side_bar.Controls.Add(b);
@@ -475,7 +481,7 @@ namespace Graphics_Train_Project
         void AddSection(string text, int y)
         {
             Label L = MakeLabel(text, 20, y, 225, 22);
-            L.ForeColor = Color.FromArgb(113, 170, 210);
+            L.ForeColor = Color.Black;
             L.Font = new Font("Arial", 9, FontStyle.Bold);
             side_bar.Controls.Add(L);
         }
@@ -919,22 +925,18 @@ namespace Graphics_Train_Project
 
         void DrawScene(Graphics g)
         {
-            g.Clear(Color.FromArgb(225, 244, 252));
+            g.Clear(Color.LightSkyBlue);
 
-            Pen grid_pen = new Pen(Color.FromArgb(205, 230, 240));
-
-            for (int x = 0; x < pic.Width; x += 100)
+            if (background_img != null)
             {
-                g.DrawLine(grid_pen, x, 0, x, pic.Height);
-            }
+                int bg_height = pic.Height;
+                int bg_width = background_img.Width * bg_height / background_img.Height;
 
-            for (int y = 0; y < pic.Height; y += 100)
-            {
-                g.DrawLine(grid_pen, 0, y, pic.Width, y);
+                for (int x = 0; x < pic.Width; x += bg_width)
+                {
+                    g.DrawImage(background_img, x, 0, bg_width, bg_height);
+                }
             }
-
-            g.FillRectangle(Brushes.LightGreen, 0, 900, pic.Width, 300);
-            g.DrawLine(new Pen(Color.SeaGreen, 4), 0, 900, pic.Width, 900);
 
             g.DrawString(
                 "ROLLERCOASTER BUILD ZONE",
@@ -978,11 +980,32 @@ namespace Graphics_Train_Project
 
             if (ride_points.Count > 0)
             {
-                g.FillEllipse(Brushes.OrangeRed, xball - 15, yball - 15, 30, 30);
-                g.DrawEllipse(new Pen(Color.DarkRed, 3), xball - 15, yball - 15, 30, 30);
+                DrawCar(g);
             }
+        }
 
-            grid_pen.Dispose();
+        void DrawCar(Graphics g)
+        {
+            if (car_img == null)
+                return;
+
+            Rectangle source = new Rectangle(50, 130, 1100, 520);
+            Rectangle destination = new Rectangle((int)xball - 45, (int)yball - 45, 90, 45);
+
+            ImageAttributes car_color = new ImageAttributes();
+            car_color.SetColorKey(Color.FromArgb(235, 235, 235), Color.White);
+
+            g.DrawImage(
+                car_img,
+                destination,
+                source.X,
+                source.Y,
+                source.Width,
+                source.Height,
+                GraphicsUnit.Pixel,
+                car_color);
+
+            car_color.Dispose();
         }
 
         void DrawStartFlag(Graphics g)

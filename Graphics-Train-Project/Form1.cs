@@ -49,15 +49,13 @@ namespace Graphics_Train_Project
 
             DrawDubb(pic.CreateGraphics());
         }
-
-
         void btnLine_Click(object sender, EventArgs e)
         {
             PathPart p = new PathPart();
             p.type = 0;
             paths.Add(p);
 
-            AfterAdd(p, "DDA straight segment added.");
+            AfterAdd(p);
         }
 
         void btnCircle_Click(object sender, EventArgs e)
@@ -66,7 +64,7 @@ namespace Graphics_Train_Project
             p.type = 1;
             paths.Add(p);
 
-            AfterAdd(p, "Polar circle segment added.");
+            AfterAdd(p);
         }
 
         void btnCurve_Click(object sender, EventArgs e)
@@ -74,17 +72,14 @@ namespace Graphics_Train_Project
             PathPart p = new PathPart();
             p.type = 2;
             paths.Add(p);
-
-            AfterAdd(p, "Bresenham curve segment added.");
         }
 
-        void AfterAdd(PathPart p, string message)
+        void AfterAdd(PathPart p)
         {
             ReArrangePath();
             RefreshList(paths.Count - 1);
             ScrollToPoint(p.end);
 
-            this.Text = message;
             DrawDubb(pic.CreateGraphics());
         }
 
@@ -125,7 +120,7 @@ namespace Graphics_Train_Project
 
             }
 
-            FinishChange("Straight length updated.");
+            FinishChange();
         }
 
         void btnRadiusMinus_Click(object sender, EventArgs e)
@@ -157,7 +152,7 @@ namespace Graphics_Train_Project
                 paths[selected].rad = 220;
             }
 
-            FinishChange("Circle radius updated.");
+            FinishChange();
         }
 
         void btnHeightMinus_Click(object sender, EventArgs e)
@@ -189,7 +184,7 @@ namespace Graphics_Train_Project
                 paths[selected].height = 260;
             }
 
-            FinishChange("Curve height updated.");
+            FinishChange();
         }
 
         void btnRotateLeft_Click(object sender, EventArgs e)
@@ -206,28 +201,25 @@ namespace Graphics_Train_Project
         {
             if (selected < 0 || selected >= paths.Count)
             {
-                this.Text = "Select a segment first.";
                 return;
             }
 
             if (paths[selected].type == 1)
             {
-                this.Text = "Rotate is for the DDA line and curve.";
                 return;
             }
 
             paths[selected].angle += value;
 
-            FinishChange("Segment rotated by " + value + " degrees.");
+            FinishChange();
         }
 
-        void FinishChange(string message)
+        void FinishChange()
         {
             ReArrangePath();
             RefreshList(selected);
             ScrollToPoint(paths[selected].end);
 
-            this.Text = message;
             DrawDubb(pic.CreateGraphics());
         }
 
@@ -467,7 +459,9 @@ namespace Graphics_Train_Project
         void tt_Tick(object sender, EventArgs e)
         {
             if (ride_points.Count == 0)
+            {
                 return;
+            }
 
             ride_index += speed;
 
@@ -475,7 +469,6 @@ namespace Graphics_Train_Project
             {
                 ride_index = ride_points.Count - 1;
                 tt.Stop();
-                this.Text = "Ride complete.";
             }
 
             xball = ride_points[ride_index].X;

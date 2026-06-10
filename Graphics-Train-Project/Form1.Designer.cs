@@ -18,24 +18,24 @@ namespace Graphics_Train_Project
         private void InitializeComponent()
         {
             this.side_bar = new System.Windows.Forms.Panel();
-            this.speed_minus_button = new System.Windows.Forms.Button();
-            this.speed_plus_button = new System.Windows.Forms.Button();
-            this.speed_label = new System.Windows.Forms.Label();
             this.clear_button = new System.Windows.Forms.Button();
+            this.speed_minus_button = new System.Windows.Forms.Button();
             this.start_button = new System.Windows.Forms.Button();
-            this.rotate_right_button = new System.Windows.Forms.Button();
-            this.rotate_left_button = new System.Windows.Forms.Button();
-            this.height_plus_button = new System.Windows.Forms.Button();
-            this.height_minus_button = new System.Windows.Forms.Button();
             this.radius_plus_button = new System.Windows.Forms.Button();
-            this.radius_minus_button = new System.Windows.Forms.Button();
-            this.length_plus_button = new System.Windows.Forms.Button();
-            this.length_minus_button = new System.Windows.Forms.Button();
-            this.path_list = new System.Windows.Forms.ListBox();
-            this.select_label = new System.Windows.Forms.Label();
+            this.speed_label = new System.Windows.Forms.Label();
+            this.speed_plus_button = new System.Windows.Forms.Button();
+            this.rotate_left_button = new System.Windows.Forms.Button();
+            this.rotate_right_button = new System.Windows.Forms.Button();
+            this.height_plus_button = new System.Windows.Forms.Button();
             this.curve_button = new System.Windows.Forms.Button();
+            this.height_minus_button = new System.Windows.Forms.Button();
             this.circle_button = new System.Windows.Forms.Button();
             this.line_button = new System.Windows.Forms.Button();
+            this.radius_minus_button = new System.Windows.Forms.Button();
+            this.path_list = new System.Windows.Forms.ListBox();
+            this.length_minus_button = new System.Windows.Forms.Button();
+            this.length_plus_button = new System.Windows.Forms.Button();
+            this.select_label = new System.Windows.Forms.Label();
             this.title_label = new System.Windows.Forms.Label();
             this.scroll_panel = new System.Windows.Forms.Panel();
             this.pic = new System.Windows.Forms.PictureBox();
@@ -46,7 +46,7 @@ namespace Graphics_Train_Project
             // 
             // side_bar
             // 
-            this.side_bar.BackColor = System.Drawing.SystemColors.Control;
+            this.side_bar.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.side_bar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.side_bar.Controls.Add(this.clear_button);
             this.side_bar.Controls.Add(this.speed_minus_button);
@@ -73,35 +73,6 @@ namespace Graphics_Train_Project
             this.side_bar.Size = new System.Drawing.Size(253, 741);
             this.side_bar.TabIndex = 0;
             // 
-            // speed_minus_button
-            // 
-            this.speed_minus_button.Location = new System.Drawing.Point(174, 633);
-            this.speed_minus_button.Name = "speed_minus_button";
-            this.speed_minus_button.Size = new System.Drawing.Size(65, 28);
-            this.speed_minus_button.TabIndex = 0;
-            this.speed_minus_button.Text = "Speed -";
-            this.speed_minus_button.UseVisualStyleBackColor = true;
-            this.speed_minus_button.Click += new System.EventHandler(this.btnSpeedMinus_Click);
-            // 
-            // speed_plus_button
-            // 
-            this.speed_plus_button.Location = new System.Drawing.Point(174, 599);
-            this.speed_plus_button.Name = "speed_plus_button";
-            this.speed_plus_button.Size = new System.Drawing.Size(65, 28);
-            this.speed_plus_button.TabIndex = 2;
-            this.speed_plus_button.Text = "Speed +";
-            this.speed_plus_button.UseVisualStyleBackColor = true;
-            this.speed_plus_button.Click += new System.EventHandler(this.btnSpeedPlus_Click);
-            // 
-            // speed_label
-            // 
-            this.speed_label.AutoSize = true;
-            this.speed_label.Location = new System.Drawing.Point(184, 675);
-            this.speed_label.Name = "speed_label";
-            this.speed_label.Size = new System.Drawing.Size(50, 13);
-            this.speed_label.TabIndex = 1;
-            this.speed_label.Text = "Speed: 7";
-            // 
             // clear_button
             // 
             this.clear_button.Location = new System.Drawing.Point(15, 638);
@@ -111,6 +82,16 @@ namespace Graphics_Train_Project
             this.clear_button.Text = "clear";
             this.clear_button.UseVisualStyleBackColor = true;
             this.clear_button.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // speed_minus_button
+            // 
+            this.speed_minus_button.Location = new System.Drawing.Point(174, 633);
+            this.speed_minus_button.Name = "speed_minus_button";
+            this.speed_minus_button.Size = new System.Drawing.Size(65, 28);
+            this.speed_minus_button.TabIndex = 0;
+            this.speed_minus_button.Text = "Speed -";
+            this.speed_minus_button.UseVisualStyleBackColor = true;
+            this.speed_minus_button.Click += new System.EventHandler(this.btnSpeedMinus_Click);
             // 
             // start_button
             // 
@@ -122,15 +103,34 @@ namespace Graphics_Train_Project
             this.start_button.UseVisualStyleBackColor = true;
             this.start_button.Click += new System.EventHandler(this.btnStart_Click);
             // 
-            // rotate_right_button
+            // radius_plus_button
             // 
-            this.rotate_right_button.Location = new System.Drawing.Point(11, 465);
-            this.rotate_right_button.Name = "rotate_right_button";
-            this.rotate_right_button.Size = new System.Drawing.Size(98, 28);
-            this.rotate_right_button.TabIndex = 7;
-            this.rotate_right_button.Text = "Rotate +";
-            this.rotate_right_button.UseVisualStyleBackColor = true;
-            this.rotate_right_button.Click += new System.EventHandler(this.btnRotateRight_Click);
+            this.radius_plus_button.Location = new System.Drawing.Point(11, 420);
+            this.radius_plus_button.Name = "radius_plus_button";
+            this.radius_plus_button.Size = new System.Drawing.Size(98, 28);
+            this.radius_plus_button.TabIndex = 3;
+            this.radius_plus_button.Text = "Radius +";
+            this.radius_plus_button.UseVisualStyleBackColor = true;
+            this.radius_plus_button.Click += new System.EventHandler(this.btnRadiusPlus_Click);
+            // 
+            // speed_label
+            // 
+            this.speed_label.AutoSize = true;
+            this.speed_label.Location = new System.Drawing.Point(184, 675);
+            this.speed_label.Name = "speed_label";
+            this.speed_label.Size = new System.Drawing.Size(50, 13);
+            this.speed_label.TabIndex = 1;
+            this.speed_label.Text = "Speed: 7";
+            // 
+            // speed_plus_button
+            // 
+            this.speed_plus_button.Location = new System.Drawing.Point(174, 599);
+            this.speed_plus_button.Name = "speed_plus_button";
+            this.speed_plus_button.Size = new System.Drawing.Size(65, 28);
+            this.speed_plus_button.TabIndex = 2;
+            this.speed_plus_button.Text = "Speed +";
+            this.speed_plus_button.UseVisualStyleBackColor = true;
+            this.speed_plus_button.Click += new System.EventHandler(this.btnSpeedPlus_Click);
             // 
             // rotate_left_button
             // 
@@ -142,6 +142,16 @@ namespace Graphics_Train_Project
             this.rotate_left_button.UseVisualStyleBackColor = true;
             this.rotate_left_button.Click += new System.EventHandler(this.btnRotateLeft_Click);
             // 
+            // rotate_right_button
+            // 
+            this.rotate_right_button.Location = new System.Drawing.Point(11, 465);
+            this.rotate_right_button.Name = "rotate_right_button";
+            this.rotate_right_button.Size = new System.Drawing.Size(98, 28);
+            this.rotate_right_button.TabIndex = 7;
+            this.rotate_right_button.Text = "Rotate +";
+            this.rotate_right_button.UseVisualStyleBackColor = true;
+            this.rotate_right_button.Click += new System.EventHandler(this.btnRotateRight_Click);
+            // 
             // height_plus_button
             // 
             this.height_plus_button.Location = new System.Drawing.Point(15, 512);
@@ -152,74 +162,6 @@ namespace Graphics_Train_Project
             this.height_plus_button.UseVisualStyleBackColor = true;
             this.height_plus_button.Click += new System.EventHandler(this.btnHeightPlus_Click);
             // 
-            // height_minus_button
-            // 
-            this.height_minus_button.Location = new System.Drawing.Point(126, 512);
-            this.height_minus_button.Name = "height_minus_button";
-            this.height_minus_button.Size = new System.Drawing.Size(98, 28);
-            this.height_minus_button.TabIndex = 4;
-            this.height_minus_button.Text = "Height -";
-            this.height_minus_button.UseVisualStyleBackColor = true;
-            this.height_minus_button.Click += new System.EventHandler(this.btnHeightMinus_Click);
-            // 
-            // radius_plus_button
-            // 
-            this.radius_plus_button.Location = new System.Drawing.Point(11, 420);
-            this.radius_plus_button.Name = "radius_plus_button";
-            this.radius_plus_button.Size = new System.Drawing.Size(98, 28);
-            this.radius_plus_button.TabIndex = 3;
-            this.radius_plus_button.Text = "Radius +";
-            this.radius_plus_button.UseVisualStyleBackColor = true;
-            this.radius_plus_button.Click += new System.EventHandler(this.btnRadiusPlus_Click);
-            // 
-            // radius_minus_button
-            // 
-            this.radius_minus_button.Location = new System.Drawing.Point(126, 420);
-            this.radius_minus_button.Name = "radius_minus_button";
-            this.radius_minus_button.Size = new System.Drawing.Size(98, 28);
-            this.radius_minus_button.TabIndex = 2;
-            this.radius_minus_button.Text = "Radius -";
-            this.radius_minus_button.UseVisualStyleBackColor = true;
-            this.radius_minus_button.Click += new System.EventHandler(this.btnRadiusMinus_Click);
-            // 
-            // length_plus_button
-            // 
-            this.length_plus_button.Location = new System.Drawing.Point(11, 373);
-            this.length_plus_button.Name = "length_plus_button";
-            this.length_plus_button.Size = new System.Drawing.Size(98, 28);
-            this.length_plus_button.TabIndex = 1;
-            this.length_plus_button.Text = "Length +";
-            this.length_plus_button.UseVisualStyleBackColor = true;
-            this.length_plus_button.Click += new System.EventHandler(this.btnLengthPlus_Click);
-            // 
-            // length_minus_button
-            // 
-            this.length_minus_button.Location = new System.Drawing.Point(126, 373);
-            this.length_minus_button.Name = "length_minus_button";
-            this.length_minus_button.Size = new System.Drawing.Size(98, 28);
-            this.length_minus_button.TabIndex = 0;
-            this.length_minus_button.Text = "Length -";
-            this.length_minus_button.UseVisualStyleBackColor = true;
-            this.length_minus_button.Click += new System.EventHandler(this.btnLengthMinus_Click);
-            // 
-            // path_list
-            // 
-            this.path_list.FormattingEnabled = true;
-            this.path_list.Location = new System.Drawing.Point(34, 220);
-            this.path_list.Name = "path_list";
-            this.path_list.Size = new System.Drawing.Size(176, 134);
-            this.path_list.TabIndex = 4;
-            this.path_list.SelectedIndexChanged += new System.EventHandler(this.path_list_SelectedIndexChanged);
-            // 
-            // select_label
-            // 
-            this.select_label.AutoSize = true;
-            this.select_label.Location = new System.Drawing.Point(19, 204);
-            this.select_label.Name = "select_label";
-            this.select_label.Size = new System.Drawing.Size(38, 13);
-            this.select_label.TabIndex = 3;
-            this.select_label.Text = "select:";
-            // 
             // curve_button
             // 
             this.curve_button.Location = new System.Drawing.Point(22, 119);
@@ -229,6 +171,16 @@ namespace Graphics_Train_Project
             this.curve_button.Text = "Add Curve";
             this.curve_button.UseVisualStyleBackColor = true;
             this.curve_button.Click += new System.EventHandler(this.btnCurve_Click);
+            // 
+            // height_minus_button
+            // 
+            this.height_minus_button.Location = new System.Drawing.Point(126, 512);
+            this.height_minus_button.Name = "height_minus_button";
+            this.height_minus_button.Size = new System.Drawing.Size(98, 28);
+            this.height_minus_button.TabIndex = 4;
+            this.height_minus_button.Text = "Height -";
+            this.height_minus_button.UseVisualStyleBackColor = true;
+            this.height_minus_button.Click += new System.EventHandler(this.btnHeightMinus_Click);
             // 
             // circle_button
             // 
@@ -250,15 +202,63 @@ namespace Graphics_Train_Project
             this.line_button.UseVisualStyleBackColor = true;
             this.line_button.Click += new System.EventHandler(this.btnLine_Click);
             // 
+            // radius_minus_button
+            // 
+            this.radius_minus_button.Location = new System.Drawing.Point(126, 420);
+            this.radius_minus_button.Name = "radius_minus_button";
+            this.radius_minus_button.Size = new System.Drawing.Size(98, 28);
+            this.radius_minus_button.TabIndex = 2;
+            this.radius_minus_button.Text = "Radius -";
+            this.radius_minus_button.UseVisualStyleBackColor = true;
+            this.radius_minus_button.Click += new System.EventHandler(this.btnRadiusMinus_Click);
+            // 
+            // path_list
+            // 
+            this.path_list.FormattingEnabled = true;
+            this.path_list.Location = new System.Drawing.Point(34, 220);
+            this.path_list.Name = "path_list";
+            this.path_list.Size = new System.Drawing.Size(176, 134);
+            this.path_list.TabIndex = 4;
+            this.path_list.SelectedIndexChanged += new System.EventHandler(this.path_list_SelectedIndexChanged);
+            // 
+            // length_minus_button
+            // 
+            this.length_minus_button.Location = new System.Drawing.Point(126, 373);
+            this.length_minus_button.Name = "length_minus_button";
+            this.length_minus_button.Size = new System.Drawing.Size(98, 28);
+            this.length_minus_button.TabIndex = 0;
+            this.length_minus_button.Text = "Length -";
+            this.length_minus_button.UseVisualStyleBackColor = true;
+            this.length_minus_button.Click += new System.EventHandler(this.btnLengthMinus_Click);
+            // 
+            // length_plus_button
+            // 
+            this.length_plus_button.Location = new System.Drawing.Point(11, 373);
+            this.length_plus_button.Name = "length_plus_button";
+            this.length_plus_button.Size = new System.Drawing.Size(98, 28);
+            this.length_plus_button.TabIndex = 1;
+            this.length_plus_button.Text = "Length +";
+            this.length_plus_button.UseVisualStyleBackColor = true;
+            this.length_plus_button.Click += new System.EventHandler(this.btnLengthPlus_Click);
+            // 
+            // select_label
+            // 
+            this.select_label.AutoSize = true;
+            this.select_label.Location = new System.Drawing.Point(19, 204);
+            this.select_label.Name = "select_label";
+            this.select_label.Size = new System.Drawing.Size(38, 13);
+            this.select_label.TabIndex = 3;
+            this.select_label.Text = "select:";
+            // 
             // title_label
             // 
             this.title_label.AutoSize = true;
             this.title_label.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
             this.title_label.Location = new System.Drawing.Point(11, 14);
             this.title_label.Name = "title_label";
-            this.title_label.Size = new System.Drawing.Size(155, 19);
+            this.title_label.Size = new System.Drawing.Size(159, 19);
             this.title_label.TabIndex = 0;
-            this.title_label.Text = "ROLLERCOASTER";
+            this.title_label.Text = "ROLLER COASTER";
             // 
             // scroll_panel
             // 
@@ -292,9 +292,8 @@ namespace Graphics_Train_Project
             this.MinimumSize = new System.Drawing.Size(1050, 700);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Custom Rollercoaster Path Simulator";
+            this.Text = "rollercoasters simulator";
             this.Load += new System.EventHandler(this.Form1_Load);
-          //  this.Shown += new System.EventHandler(this.Form1_Shown);
             this.side_bar.ResumeLayout(false);
             this.side_bar.PerformLayout();
             this.scroll_panel.ResumeLayout(false);

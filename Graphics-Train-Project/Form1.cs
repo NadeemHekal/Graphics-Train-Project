@@ -247,6 +247,11 @@ namespace Graphics_Train_Project
 
         public LineSegment Rotate(LineSegment L, float xRef, float yRef)
         {
+            return Rotate(L, xRef, yRef, 0.5f);
+        }
+
+        public LineSegment Rotate(LineSegment L, float xRef, float yRef, float angleRadians)
+        {
             ///////////////////
             //// translate
             //////////////////
@@ -258,14 +263,14 @@ namespace Graphics_Train_Project
             ///////////////////
             //// Rotate around origin
             //////////////////
-            double xn = L.ptS.X * Math.Cos(0.5f) - L.ptS.Y * Math.Sin(0.5f);
-            double Yn = L.ptS.X * Math.Sin(0.5f) + L.ptS.Y * Math.Cos(0.5f);
+            double xn = L.ptS.X * Math.Cos(angleRadians) - L.ptS.Y * Math.Sin(angleRadians);
+            double Yn = L.ptS.X * Math.Sin(angleRadians) + L.ptS.Y * Math.Cos(angleRadians);
 
             L.ptS.X = (float)xn;
             L.ptS.Y = (float)Yn;
 
-            xn = L.ptE.X * Math.Cos(0.5f) - L.ptE.Y * Math.Sin(0.5f);
-            Yn = L.ptE.X * Math.Sin(0.5f) + L.ptE.Y * Math.Cos(0.5f);
+            xn = L.ptE.X * Math.Cos(angleRadians) - L.ptE.Y * Math.Sin(angleRadians);
+            Yn = L.ptE.X * Math.Sin(angleRadians) + L.ptE.Y * Math.Cos(angleRadians);
 
             L.ptE.X = (float)xn;
             L.ptE.Y = (float)Yn;
@@ -296,7 +301,8 @@ namespace Graphics_Train_Project
     {
         public Form1()
         {
-           
+            InitializeComponent();
+            BuildInterface();
         }
 
         private void Form1_Load(object sender, EventArgs e)

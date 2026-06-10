@@ -1,0 +1,10 @@
+C:\Users\asaga\source\repos\NadeemHekal\Graphics-Train-Project\Graphics-Train-Project\bin\Debug\Graphics-Train-Project.exe.config
+C:\Users\asaga\source\repos\NadeemHekal\Graphics-Train-Project\Graphics-Train-Project\bin\Debug\Graphics-Train-Project.exe
+C:\Users\asaga\source\repos\NadeemHekal\Graphics-Train-Project\Graphics-Train-Project\bin\Debug\Graphics-Train-Project.pdb
+C:\Users\asaga\source\repos\NadeemHekal\Graphics-Train-Project\Graphics-Train-Project\obj\Debug\Graphics-Train-Project.csproj.AssemblyReference.cache
+C:\Users\asaga\source\repos\NadeemHekal\Graphics-Train-Project\Graphics-Train-Project\obj\Debug\Graphics_Train_Project.DDA.resources
+C:\Users\asaga\source\repos\NadeemHekal\Graphics-Train-Project\Graphics-Train-Project\obj\Debug\Graphics_Train_Project.Properties.Resources.resources
+C:\Users\asaga\source\repos\NadeemHekal\Graphics-Train-Project\Graphics-Train-Project\obj\Debug\Graphics-Train-Project.csproj.GenerateResource.cache
+C:\Users\asaga\source\repos\NadeemHekal\Graphics-Train-Project\Graphics-Train-Project\obj\Debug\Graphics-Train-Project.csproj.CoreCompileInputs.cache
+C:\Users\asaga\source\repos\NadeemHekal\Graphics-Train-Project\Graphics-Train-Project\obj\Debug\Graphics-Train-Project.exe
+C:\Users\asaga\source\repos\NadeemHekal\Graphics-Train-Project\Graphics-Train-Project\obj\Debug\Graphics-Train-Project.pdb

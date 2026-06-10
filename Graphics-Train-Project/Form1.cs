@@ -532,7 +532,12 @@ namespace Graphics_Train_Project
 
             for (int i = 0; i < paths.Count; i++)
             {
-                bool is_selected = i == selected;
+                bool is_selected = false;
+
+                if (i == selected)
+                {
+                    is_selected = true;
+                }
 
                 if (paths[i].type == 0)
                 {
@@ -546,8 +551,6 @@ namespace Graphics_Train_Project
                 {
                     DrawCurvePath(g, paths[i], is_selected);
                 }
-
-                PointF mid = GetPathPoint(paths[i], 0.5f);
 
             }
             if (ride_points.Count > 0)
@@ -752,33 +755,6 @@ namespace Graphics_Train_Project
                     y += sy;
                 }
             }
-        }
-
-        PointF GetPathPoint(PathPart p, float t)
-        {
-            if (p.type == 0)
-            {
-                PointF result = new PointF();
-
-                result.X = p.start.X + (p.end.X - p.start.X) * t;
-                result.Y = p.start.Y + (p.end.Y - p.start.Y) * t;
-
-                return result;
-            }
-
-            if (p.type == 1)
-            {
-                Circle c = new Circle();
-
-                c.Rad = p.rad;
-                c.XC = (int)(p.start.X + p.rad);
-                c.YC = (int)(p.start.Y - p.rad);
-
-                return c.Getnextpoint((int)(90 - 360 * t));
-            }
-
-            BezierCurve curve = MakeCurve(p);
-            return curve.CalcCurvePointAtTime(t);
         }
 
     }

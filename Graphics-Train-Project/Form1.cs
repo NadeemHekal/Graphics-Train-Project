@@ -33,7 +33,7 @@ namespace Graphics_Train_Project
         public Form1()
         {
             InitializeComponent();
-
+            this.WindowState = FormWindowState.Maximized;
             tt.Interval = 30;
             tt.Tick += tt_Tick;
         }
@@ -46,7 +46,6 @@ namespace Graphics_Train_Project
             background_img = new Bitmap(Path.Combine(image_folder, "background.jpg"));
             car_img = new Bitmap(Path.Combine(image_folder, "car.jpg"));
 
-            RefreshList(-1);
 
             DrawDubb(pic.CreateGraphics());
         }
@@ -190,6 +189,7 @@ namespace Graphics_Train_Project
                 paths[selected].height = 260;
             }
 
+            FinishChange("Curve height updated.");
         }
 
         void btnRotateLeft_Click(object sender, EventArgs e)
@@ -283,11 +283,17 @@ namespace Graphics_Train_Project
                 string name;
 
                 if (paths[i].type == 0)
-                    name = "DDA Straight (" + paths[i].length + " px)";
+                {
+                    name = "DDA Straight";
+                }
                 else if (paths[i].type == 1)
-                    name = "Polar Circle (R=" + paths[i].rad + ")";
+                {
+                    name = "Polar Circle";
+                }
                 else
-                    name = "Bresenham Curve (H=" + paths[i].height + ")";
+                {
+                    name = "Bresenham Curve";
+                }
 
                 path_list.Items.Add((i + 1) + ". " + name);
             }
@@ -307,7 +313,6 @@ namespace Graphics_Train_Project
         {
             if (paths.Count == 0)
             {
-                this.Text = "Add at least one segment first.";
                 return;
             }
 
@@ -319,7 +324,6 @@ namespace Graphics_Train_Project
 
             tt.Start();
 
-            this.Text = "Simulation running.";
             DrawDubb(pic.CreateGraphics());
         }
 
@@ -572,7 +576,6 @@ namespace Graphics_Train_Project
                 GraphicsUnit.Pixel,
                 car_color);
 
-            car_color.Dispose();
         }
 
         void DrawLinePath(Graphics g, PathPart p, bool is_selected)
@@ -591,24 +594,33 @@ namespace Graphics_Train_Project
             line.calc();
 
             int safety = 0;
+            Pen line_pen = new Pen(Color.Navy, 5);
 
             while (line.travel && safety < 2000)
             {
-                g.FillEllipse(Brushes.Navy, line.cx - 3, line.cy - 3, 6, 6);
+                float old_x = line.cx;
+                float old_y = line.cy;
+
                 line.CalcNextPoint();
+
+                if (line.travel)
+                {
+                    g.DrawLine(line_pen, old_x, old_y, line.cx, line.cy);
+                }
+                else
+                {
+                    g.DrawLine(line_pen, old_x, old_y, p.end.X, p.end.Y);
+                }
+
                 safety++;
             }
 
-            g.FillEllipse(Brushes.Navy, p.end.X - 3, p.end.Y - 3, 6, 6);
+            line_pen.Dispose();
         }
 
         void DrawCirclePath(Graphics g, PathPart p, bool is_selected)
         {
-            Rectangle rc = new Rectangle(
-                (int)p.start.X,
-                (int)(p.start.Y - p.rad * 2),
-                p.rad * 2,
-                p.rad * 2);
+            Rectangle rc = new Rectangle((int)p.start.X,(int)(p.start.Y - p.rad * 2),p.rad * 2,p.rad * 2);
 
             if (is_selected)
             {
@@ -670,20 +682,19 @@ namespace Graphics_Train_Project
 
             Point p0 = Point.Round(p.start);
 
-            Point p1 = Point.Round(new PointF(
-                p.start.X + dir.X * 70 + normal.X * p.height,
-                p.start.Y + dir.Y * 70 + normal.Y * p.height));
+            Point p1 = Point.Round(new PointF(p.start.X + dir.X * 70 + normal.X * p.height,p.start.Y + dir.Y * 70 + normal.Y * p.height));
 
-            Point p2 = Point.Round(new PointF(
-                p.start.X + dir.X * 160 + normal.X * p.height,
-                p.start.Y + dir.Y * 160 + normal.Y * p.height));
+            Point p2 = Point.Round(new PointF(p.start.X + dir.X * 160 + normal.X * p.height,p.start.Y + dir.Y * 160 + normal.Y * p.height));
 
             Point p3 = Point.Round(p.end);
 
             curve.SetControlPoint(p0);
+
             curve.SetControlPoint(p1);
             curve.SetControlPoint(p2);
+
             curve.SetControlPoint(p3);
+
 
             return curve;
         }

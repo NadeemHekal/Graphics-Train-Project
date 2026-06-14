@@ -356,7 +356,10 @@ namespace Graphics_Train_Project
             yball = 0;
 
             RefreshList(-1);
-            scroll_panel.AutoScrollPosition = new Point(0, 0);
+            if (true)
+            {
+                scroll_panel.AutoScrollPosition = new Point(0, 0);
+            }
 
             DrawDubb(pic.CreateGraphics());
         }
@@ -392,13 +395,11 @@ namespace Graphics_Train_Project
             line.Yend = p.end.Y;
             line.calc();
 
-            int safety = 0;
 
-            while (line.travel && safety < 2000)
+            while (line.travel )
             {
                 ride_points.Add(new PointF(line.cx, line.cy));
                 line.CalcNextPoint();
-                safety++;
             }
 
             ride_points.Add(p.end);
@@ -475,7 +476,10 @@ namespace Graphics_Train_Project
             yball = ride_points[ride_index].Y;
 
             DrawDubb(pic.CreateGraphics());
-            ScrollToPoint(new PointF(xball, yball));
+            if (true)
+            {
+                ScrollToPoint(new PointF(xball, yball));
+            }
         }
 
         void ScrollToPoint(PointF p)
@@ -492,8 +496,10 @@ namespace Graphics_Train_Project
             {
                 y = 0;
             }
-
-            scroll_panel.AutoScrollPosition = new Point(x, y);
+            if (true)
+            {
+                scroll_panel.AutoScrollPosition = new Point(x, y);
+            }
         }
 
         void pic_Paint(object sender, PaintEventArgs e)
